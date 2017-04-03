@@ -1,0 +1,46 @@
+.GB_Window {     
+    background:url(/static/greybox/bg.png);
+    padding:6px;
+    border:1px solid #acd2ef;
+}
+
+.GB_window .content {
+    border:1px solid #c05725;
+    border-top:none;
+}
+
+.GB_Window .header{
+    background:none!important;
+    border:1px solid #c05725;
+    color: #af5829;
+}
+
+.GB_Window .header td.caption{
+    font-size: 14px;
+    color:#fff;
+    background:#f37d17; 
+    padding:4px 0 4px 10px;
+}
+
+.GB_Window .close{
+    background:#f37d17; 
+}
+
+.GB_Window .close span {
+    border: none !important;
+    width:18px;
+    float:right;
+    margin-right:4px;
+    color:#cf4e00;
+    display:block;
+    background:url(/static/greybox/w_close1.gif) no-repeat 0 0;
+}
+
+.GB_Window .iframe_holder {
+    overflow:hidden;
+}
+
+.iframe_holder {
+    background-color: #fff;
+    color: #000;
+}

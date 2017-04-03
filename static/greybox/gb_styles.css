@@ -1,0 +1,51 @@
+/* Last-Modified: 28/06/06 00:08:22 */
+.GB_overlay {
+    position: fixed;
+    top: 0;  left: 0;
+    width:100%;   height:100%;
+    background: none;
+}
+
+.GB_window {
+    left: 0;
+    top: 0;
+    position: absolute;
+    overflow: visible;
+}
+
+.GB_window .content {
+    width: auto;
+    margin: 0;
+    padding: 0;
+}
+
+.GB_frame {
+    margin: 0;
+    overflow: auto;
+    padding: 0;
+    transition: height 0.2s ease 0s;
+    white-space: nowrap;
+}
+
+.GB_Window .header {
+    border-bottom: 1px solid #aaa;
+    border-top: 1px solid #999;
+    border-left: 3px solid #ccc;
+    border-right: 3px solid #ccc;
+    margin: 0;
+    padding: 0;
+    color: #333;
+    border-spacing: 0;
+}
+
+.GB_Window .caption {
+    text-align: left;
+    white-space: nowrap;
+    padding-right: 20px;
+}
+
+.GB_Window .close { text-align: right; }
+.GB_Window .close span { 
+    cursor: pointer; 
+    height: 18px;
+}

@@ -1,0 +1,118 @@
+<!--
+Notice: I feel so dirty doing this, but its the only way to make it cross browser.
+-->
+<html>
+<head>
+  <script>
+    var GB = parent.GB_getLast();
+    document.write('<script type="text/javascript" src="' + parent.$static_path('/generated/AJS.js') +'"><\/script>');
+  </script>
+  <style>
+    body {
+      padding: 0;
+      margin: 0;
+      overflow: hidden;
+      width: 100%;
+      background-color: white;
+    }
+
+    #GB_frame {
+      visibility: hidden;
+      width: 100%;
+      height: 100%;
+    }
+
+    #loading {
+      padding-top: 50px;
+      position: absolute;
+      width: 100%;
+      top: 0;
+      text-align: center;
+      vertical-align: middle;
+    }
+  </style>
+</head>
+<body>
+
+<div id="loading">
+  <img src="/static/indicator.gif">
+</div>
+
+<script>
+var loading = AJS.$('loading');
+var gb_type = GB.type;
+var gb_url = GB.url;
+
+//Start loading in the iframe
+if(gb_type == "page") {
+  document.write('<iframe id="GB_frame" src="' + gb_url + '" frameborder="0"></iframe>');
+}
+else {
+  var img_holder = new Image();
+  img_holder.src = gb_url;
+  document.write('<img id="GB_frame" src="' + gb_url + '" style="cursor: pointer" onclick="top.GB_hide()">');
+}
+var frame = AJS.$('GB_frame');
+</script>
+
+</body>
+<script>
+function setupOuterGB() {
+    frame.style.visibility = 'visible';
+    GB.setFrameSize();
+    GB.setWindowPosition();
+}
+
+function loaded() {
+    if(gb_type == "image") {
+        if(img_holder.width != 0 && img_holder.height != 0) {
+            var width = img_holder.width;
+            var height = img_holder.height;
+
+            var viewport = top.AJS.getWindowSize();
+            var ratio = height/width;
+
+            if ((viewport.w-40) < width){
+            	width = viewport.w - 120;
+            	height = width*ratio;
+            }
+
+            GB.width = width;
+            GB.height = height;
+
+            img_holder.width = width;
+            img_holder.height = height;
+
+            setTimeout(function() {
+                AJS.removeElement(loading);
+                setupOuterGB();
+            }, 100);
+        }
+        else {
+            return setTimeout(loaded, 500);
+        }
+    }
+    else {
+        AJS.removeElement(loading);
+        GB.width = frame.offsetWidth;
+        GB.height = frame.offsetHeight;
+        setupOuterGB();
+        GB.setFrameSize(GB.iframe, frame.offsetHeight);
+    }
+}
+
+if(GB.show_loading) {
+    AJS.AEV(window, 'lazy_load', function(e) {
+        loaded();
+    });
+}
+else {
+    loaded();
+}
+
+AJS.AEV(window, 'resize', function() {
+    if(AJS.isOpera())
+        AJS.setHeight(frame, GB.height);
+});
+</script>
+</html>
